@@ -5,10 +5,7 @@ import (
 	"strings"
 )
 
-
-
-
-func main()  {
+func main() {
 	var ip1 string
 	var ip2 string
 
@@ -21,11 +18,11 @@ func main()  {
 
 	if len(ip1) != len(ip2) {
 		fmt.Println("Both strings are NOT anagrams")
-		return 
+		return
 	}
 
 	m1 := make(map[string]int, 0)
-	
+
 	for _, val := range strings.Split(ip1, "") {
 		if m1[val] == 0 {
 			m1[val] = 1
@@ -33,10 +30,12 @@ func main()  {
 			m1[val]++
 		}
 	}
+
 	fmt.Println("Character map:", m1)
-	for _, val := range strings.Split(ip2, ""){
+
+	for _, val := range strings.Split(ip2, "") {
 		if v, ok := m1[val]; ok && v > 0 {
-			m1[val]-- 
+			m1[val]--
 		} else {
 			fmt.Println("Both strings are NOT anagrams")
 			return
@@ -44,11 +43,10 @@ func main()  {
 	}
 	// if !contains(ip2, val){
 	//    fmt.Println("Both strings are NOT anagrams")
-	//    return 
+	//    return
 	// }
 	fmt.Println("Both strings are anagrams")
 }
-
 
 // func contains(str string, c string) bool{
 // 	for _, val := range strings.Split(str, "") {
@@ -58,4 +56,4 @@ func main()  {
 // 	}
 
 // 	return false
-// } 
+// }

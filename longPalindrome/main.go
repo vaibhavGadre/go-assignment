@@ -21,7 +21,7 @@ func main() {
 		low = i - 1
 		high = i
 
-		for low >= 0 && high < strLen && str[low] == str[high]{
+		for low >= 0 && high < strLen && str[low] == str[high] {
 			low--
 			high++
 		}
@@ -40,18 +40,18 @@ func main() {
 		low = i - 1
 		high = i + 1
 
-		for low >=0 && high < strLen && str[low] == str[high]  {
+		for low >= 0 && high < strLen && str[low] == str[high] {
 			low--
 			high++
 		}
-     
+
 		low++
 		high--
 		if str[low] == str[high] && maxLength < high-low+1 {
 			maxLength = high - low + 1
 			start = low
 			end = high
-		} 
+		}
 	}
 
 	fmt.Println("max length:", maxLength, "string:", str[start:end+1], "start:", start, "end:", end)
