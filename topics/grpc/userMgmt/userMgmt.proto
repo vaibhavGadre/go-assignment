@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package userMgmt;
+
+option go_package = "example.com/go-userMgmt-grpc;go_userMgmt_grpc";
+
+import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
+
+
+service UserManagement {
+    rpc CreateNewUser (NewUser) returns (User) {
+        option (google.api.http) = {
+            post:"/v1/user",
+            body:"*"
+        };
+    }
+    rpc GetUsers (GetUsersParams) returns (UserList) {
+        option (google.api.http) = {
+            get:"/v1/user"     
+        };
+    }
+    rpc GetUserById (GetUserParams) returns (User) {
+        option (google.api.http) = {
+            get:"/v1/user/{userId}"
+        };
+    }
+    rpc UpdateUser (UpdateUserReq) returns (UpdateUserRes) {
+        option (google.api.http) = {
+            put:"/v1/user/{user.id}"
+            body: "user"
+        };
+    }
+    rpc DeleteUser (GetUserParams) returns (UpdateUserRes) {
+        option (google.api.http) = {
+            delete:"/v1/user/{userId}"
+        };
+    }
+}
+
+message NewUser {
+    string name = 1;
+    int32 age = 2;
+}
+
+message User {
+    // Output only.
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+    // Output only. Creation time of the book.
+	// google.protobuf.Timestamp create_time = 4;
+}
+
+message UpdateUserReq {
+    User user = 1;
+    // The list of fields to be updated.
+	google.protobuf.FieldMask update_mask = 2;
+}
+
+message GetUsersParams {
+
+}
+
+message GetUserParams {
+    int32 userId = 1;
+}
+
+message UpdateUserRes {
+    int64 rowsAffected = 1;
+  }
+
+message UserList {
+    repeated User users = 1; 
+}

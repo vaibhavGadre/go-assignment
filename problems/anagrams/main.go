@@ -16,9 +16,17 @@ func main() {
 
 	fmt.Println("values:", ip1, ip2)
 
-	if len(ip1) != len(ip2) {
+	if isAnagram(ip1, ip2) {
+		fmt.Println("Both strings are anagrams")
+	} else {
 		fmt.Println("Both strings are NOT anagrams")
-		return
+	}
+}
+
+func isAnagram(ip1 string, ip2 string) bool {
+	if len(ip1) != len(ip2) {
+		// fmt.Println("Both strings are NOT anagrams")
+		return false
 	}
 
 	m1 := make(map[string]int, 0)
@@ -37,15 +45,11 @@ func main() {
 		if v, ok := m1[val]; ok && v > 0 {
 			m1[val]--
 		} else {
-			fmt.Println("Both strings are NOT anagrams")
-			return
+			// fmt.Println("Both strings are NOT anagrams")
+			return false
 		}
 	}
-	// if !contains(ip2, val){
-	//    fmt.Println("Both strings are NOT anagrams")
-	//    return
-	// }
-	fmt.Println("Both strings are anagrams")
+	return true
 }
 
 // func contains(str string, c string) bool{

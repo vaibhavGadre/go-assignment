@@ -1,0 +1,29 @@
+syntax= "proto3";
+
+package streams;
+
+option go_package="example.com/go-streams-grpc;go_streams_grpc";
+
+message RandomNumRequest {
+    int32 count=1;
+    bool  isRange=2;
+    int64 minValue=3;
+    int64 maxValue=4;
+}
+
+message RandomNumResponse {
+    int64 value=1;
+}
+
+message SumNumRequest {
+   int64 value =1; 
+}
+
+message SumNumResponse {
+   int64 total=1; 
+}
+
+service DataService {
+    rpc RandomNumbers (RandomNumRequest) returns (stream RandomNumResponse);
+    rpc SumNumbers (stream SumNumRequest) returns (SumNumResponse);
+}
